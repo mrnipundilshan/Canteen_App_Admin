@@ -103,3 +103,29 @@ exports.getuserorders = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+exports.adminlogin = async(req,res,next)=>{
+    try {
+        const {username,password} = req.body;
+
+        const user = await UserService.checkuser(username);
+
+        if(!user){
+            return res.status(400).json({status:false, error: 'User does not exist'});
+        }
+
+        const isMatch = await user.comparePassword(password);
+
+        if(isMatch === false){
+            return res.status(400).json({status: false, error:"Password Invalid"});
+        }
+
+        let tokenData = {_id:user._id, username:user.username};
+
+        const token = await UserService.genarateToken(tokenData,"secretKey",'1h');
+
+        res.json({status:true, token:token});
+    } catch(error){
+        next(error);
+    }
+}

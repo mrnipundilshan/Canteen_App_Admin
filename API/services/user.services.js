@@ -1,5 +1,6 @@
 const UserModel = require('../model/user.model');
 const OrderModel = require('../model/order.model');
+const AdminModel = require('../model/admin.model');
 const jwt = require('jsonwebtoken');
 
 class UserService{
@@ -15,9 +16,9 @@ class UserService{
         }
     }
 
-    static async checkuser(mobile_number){
+    static async checkuser(username){
         try{
-            return await UserModel.findOne({mobile_number});
+            return await AdminModel.findOne({username});
         } catch(error){
             throw error
         }
@@ -27,14 +28,7 @@ class UserService{
         return jwt.sign(tokenData,secretKey,{expiresIn:jwt_expire})
     }
 
-    static async placeorder(mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price){
-        try{
-            const creteOrder = new OrderModel({mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price});
-            return await creteOrder.save();
-        }catch(error){         
-            throw error;
-        }
-    }
+    
 
 }
 

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
-import 'package:canteen/pages/menu/menu.dart';
+import 'package:canteen/admintools.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,25 +35,19 @@ class _loginState extends State<login> {
       if (mobiletextcontroller.text.isNotEmpty &&
           passwordtextcontroller.text.isNotEmpty) {
         var reqbody = {
-          "mobile_number": mobiletextcontroller.text,
+          "username": mobiletextcontroller.text,
           "password": passwordtextcontroller.text
         };
 
-        var response = await http.post(Uri.parse(loginn),
+        var response = await http.post(Uri.parse(adminlogin),
             headers: {"content-Type": "application/json"},
             body: jsonEncode(reqbody));
 
         var jsonResponse = jsonDecode(response.body);
 
         if (jsonResponse['status']) {
-          var myToken = jsonResponse['token'];
-
-          prefs.setString('token', myToken);
-
           Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => menupage(token: myToken)));
+              context, MaterialPageRoute(builder: (context) => toolspage()));
         } else {
           print("Somthing went wrong");
         }

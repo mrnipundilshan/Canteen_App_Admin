@@ -33,9 +33,6 @@ const userSchema = new Schema({
 });
 
 
-
-
-
 userSchema.pre('save', async function(){
     try{
         var user = this;
