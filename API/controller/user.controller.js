@@ -108,7 +108,7 @@ exports.adminlogin = async(req,res,next)=>{
     try {
         const {username,password} = req.body;
 
-        const user = await UserService.checkuser(username);
+        const user = await UserService.admincheckuser(username);
 
         if(!user){
             return res.status(400).json({status:false, error: 'User does not exist'});

@@ -16,7 +16,15 @@ class UserService{
         }
     }
 
-    static async checkuser(username){
+    static async checkuser(mobile_number){
+        try{
+            return await UserModel.findOne({mobile_number});
+        } catch(error){
+            throw error
+        }
+    }
+
+    static async admincheckuser(username){
         try{
             return await AdminModel.findOne({username});
         } catch(error){
@@ -26,6 +34,15 @@ class UserService{
 
     static async genarateToken(tokenData, secretKey,jwt_expire){
         return jwt.sign(tokenData,secretKey,{expiresIn:jwt_expire})
+    }
+
+    static async placeorder(mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price){
+        try{
+            const creteOrder = new OrderModel({mobile_number,total,veg_count,veg_price,egg_count,egg_price,chicken_count,chicken_price,rice_count,rice_price,kottu_count,kottu_price,fish_count,fish_price});
+            return await creteOrder.save();
+        }catch(error){         
+            throw error;
+        }
     }
 
     

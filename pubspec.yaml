@@ -40,6 +40,10 @@ dependencies:
   jwt_decoder: ^2.0.1
   provider: ^6.1.2
   giffy_dialog: ^2.1.0
+  flutter_app_name: ^0.1.1
+
+flutter_app_name:
+  name: "Admin"
 
 dev_dependencies:
   flutter_test:
