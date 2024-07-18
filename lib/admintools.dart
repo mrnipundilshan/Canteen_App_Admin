@@ -1,4 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -87,7 +88,12 @@ class grid extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             splashColor: Colors.black12,
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const allusers()),
+              );
+            },
           ),
         ),
       ),

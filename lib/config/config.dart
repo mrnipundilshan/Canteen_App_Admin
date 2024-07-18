@@ -7,3 +7,4 @@ final getprodetails = "${url}getprodetails";
 final getuserorders = "${url}getuserorders";
 
 final adminlogin = "${url}adminlogin";
+final getusers = "${url}getusers";

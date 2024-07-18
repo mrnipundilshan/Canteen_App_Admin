@@ -1,6 +1,5 @@
 import 'package:canteen/admintools.dart';
 import 'package:canteen/config/config.dart';
-import 'package:canteen/loginpage.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,9 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        '/login': (context) => const login(),
-      },
       theme: ThemeData(
           textSelectionTheme: const TextSelectionThemeData(
         selectionHandleColor: Color.fromRGBO(60, 121, 98, 1.0),

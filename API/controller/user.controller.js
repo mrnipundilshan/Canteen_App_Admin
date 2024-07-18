@@ -129,3 +129,13 @@ exports.adminlogin = async(req,res,next)=>{
         next(error);
     }
 }
+
+exports.getusers = async (req,res)=>{
+    try{
+        const collection = db.collection('users');
+        const menu = await collection.find({}).toArray();
+        res.status(200).json(menu);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};

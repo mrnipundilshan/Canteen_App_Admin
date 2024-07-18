@@ -14,6 +14,10 @@ router.post('/getprodetails',UserController.getprodetails);
 
 router.post('/getuserorders',UserController.getuserorders);
 
+
+
+
 router.post('/adminlogin',UserController.adminlogin);
+router.get('/getusers',UserController.getusers);
 
 module.exports = router;
