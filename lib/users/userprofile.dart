@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
+import 'package:canteen/userorder/orderpage.dart';
 import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
@@ -136,7 +136,15 @@ class _userprofileState extends State<userprofile> {
                               child: InkWell(
                                   borderRadius: BorderRadius.circular(10),
                                   splashColor: Colors.black12,
-                                  onTap: () {}),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => orderpage(
+                                                  mobilenumber:
+                                                      widget.mobile_number,
+                                                )));
+                                  }),
                             ),
                           ),
                         ]),
