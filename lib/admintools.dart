@@ -1,7 +1,6 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class toolspage extends StatefulWidget {
   const toolspage({super.key});

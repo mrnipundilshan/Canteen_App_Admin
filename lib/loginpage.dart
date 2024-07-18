@@ -103,7 +103,7 @@ class _loginState extends State<login> {
                             cursorColor: const Color.fromRGBO(60, 121, 98, 1.0),
                             decoration: const InputDecoration(
                               counterText: '',
-                              hintText: "Mobile Number",
+                              hintText: "User Name",
                               hintStyle: TextStyle(
                                   color: Color.fromRGBO(60, 121, 98, 1.0),
                                   fontWeight: FontWeight.bold),
