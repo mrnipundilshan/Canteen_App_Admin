@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'package:canteen/config/config.dart';
+import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:http/http.dart' as http;
 
 class order_card extends StatefulWidget {
   final int total;
@@ -38,6 +43,24 @@ class order_card extends StatefulWidget {
 }
 
 class _order_cardState extends State<order_card> {
+  void removeorder() async {
+    var reqbody = {
+      "_id": widget.orderid,
+    };
+    var response = await http.delete(Uri.parse(removeorderr),
+        headers: {"content-Type": "application/json"},
+        body: jsonEncode(reqbody));
+
+    var jsonResponse = jsonDecode(response.body);
+
+    if (jsonResponse['status']) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => allusers()));
+    } else {
+      print("Somthing went wrong");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     int vegtotal = widget.veg_count * widget.veg_price;
@@ -282,12 +305,115 @@ class _order_cardState extends State<order_card> {
               ),
             ],
           ),
-          Text(
-            "Total: Rs." + widget.total.toString(),
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: size.width * 0.05,
-                color: const Color.fromRGBO(60, 121, 98, 1.0)),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Total: Rs." + widget.total.toString(),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(
+                    left: size.width * 0.03, right: size.width * 0.03),
+                width: size.width * 0.2,
+                height: size.height * 0.04,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 24, 117, 83),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Stack(alignment: Alignment.center, children: [
+                  Padding(
+                    padding: EdgeInsets.only(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Remove",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: size.width * 0.03,
+                              color: Color.fromARGB(255, 255, 255, 255)),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned.fill(
+                    child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                            borderRadius: BorderRadius.circular(10),
+                            splashColor: Colors.black12,
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return GiffyDialog.lottie(
+                                      backgroundColor: Colors.white,
+                                      entryAnimation: EntryAnimation.bottom,
+                                      Lottie.asset(
+                                        "assets/remove.json",
+                                        height: 150,
+                                        fit: BoxFit.fitHeight,
+                                      ),
+                                      title: Text(
+                                        'Confirm Your Order',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: size.width * 0.05,
+                                            color: const Color.fromRGBO(
+                                                60, 121, 98, 1.0)),
+                                      ),
+                                      actions: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            TextButton(
+                                              onPressed: () => Navigator.pop(
+                                                  context, 'CANCEL'),
+                                              child: Text(
+                                                'CANCEL',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize:
+                                                        size.width * 0.035,
+                                                    color: const Color.fromRGBO(
+                                                        60, 121, 98, 1.0)),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                removeorder();
+                                                Navigator.pop(context, 'OK');
+                                              },
+                                              child: Text('OK',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize:
+                                                          size.width * 0.035,
+                                                      color:
+                                                          const Color.fromRGBO(
+                                                              60,
+                                                              121,
+                                                              98,
+                                                              1.0))),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            })),
+                  ),
+                ]),
+              ),
+            ],
           ),
         ],
       ),
