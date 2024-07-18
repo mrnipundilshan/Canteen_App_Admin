@@ -8,3 +8,4 @@ final getuserorders = "${url}getuserorders";
 
 final adminlogin = "${url}adminlogin";
 final getusers = "${url}getusers";
+final removeuserr = "${url}removeuser";

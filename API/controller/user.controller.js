@@ -139,3 +139,24 @@ exports.getusers = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+exports.removeuser = async (req, res) => {
+    try {
+        const { mobile_number } = req.body;
+
+        if (!mobile_number) {
+            return res.status(400).json({ status: false, error: 'Mobile number is required' });
+        }
+
+        const collection = db.collection('users');
+        const result = await collection.deleteOne({ mobile_number: mobile_number });
+
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ status: false, error: 'User not found' });
+        }
+
+        res.status(200).json({ status: true, success: 'User deleted successfully' });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Error deleting user', details: error });
+    }
+};

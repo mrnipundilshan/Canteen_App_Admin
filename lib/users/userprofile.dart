@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/config/config.dart';
+import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
 import 'package:giffy_dialog/giffy_dialog.dart';
+import 'package:http/http.dart' as http;
 
 class userprofile extends StatefulWidget {
   final String mobile_number;
@@ -20,6 +25,24 @@ class userprofile extends StatefulWidget {
 }
 
 class _userprofileState extends State<userprofile> {
+  void removeuser() async {
+    var reqbody = {
+      "mobile_number": widget.mobile_number,
+    };
+    var response = await http.delete(Uri.parse(removeuserr),
+        headers: {"content-Type": "application/json"},
+        body: jsonEncode(reqbody));
+
+    var jsonResponse = jsonDecode(response.body);
+
+    if (jsonResponse['status']) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => allusers()));
+    } else {
+      print("Somthing went wrong");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -164,9 +187,9 @@ class _userprofileState extends State<userprofile> {
                                               entryAnimation:
                                                   EntryAnimation.bottom,
                                               Lottie.asset(
-                                                "assets/cooking.json",
-                                                height: 200,
-                                                fit: BoxFit.cover,
+                                                "assets/remove.json",
+                                                height: 150,
+                                                fit: BoxFit.fitHeight,
                                               ),
                                               title: Text(
                                                 'Confirm Your Order',
@@ -202,9 +225,7 @@ class _userprofileState extends State<userprofile> {
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
-                                                        // placeorder(
-                                                        //     totalprovider.total);
-
+                                                        removeuser();
                                                         Navigator.pop(
                                                             context, 'OK');
                                                       },

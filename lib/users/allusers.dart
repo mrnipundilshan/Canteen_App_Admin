@@ -17,10 +17,8 @@ class _allusersState extends State<allusers> {
   Future<List<User>> users = getallusers();
 
   static Future<List<User>> getallusers() async {
-    print("aw");
     final response = await http.get(Uri.parse(getusers));
     final body = json.decode(response.body);
-    print(body);
     return body.map<User>(User.fromJson).toList();
   }
 

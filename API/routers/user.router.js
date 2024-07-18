@@ -19,5 +19,6 @@ router.post('/getuserorders',UserController.getuserorders);
 
 router.post('/adminlogin',UserController.adminlogin);
 router.get('/getusers',UserController.getusers);
+router.delete('/removeuser',UserController.removeuser);
 
 module.exports = router;
