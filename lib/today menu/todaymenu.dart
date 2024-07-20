@@ -3,6 +3,7 @@ import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
 import 'package:canteen/users/usercard.dart';
 import 'package:canteen/users/userclass.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -14,19 +15,17 @@ class todaymenu extends StatefulWidget {
 }
 
 class _todaymenuState extends State<todaymenu> {
-  Future<List<User>> users = getallusers();
-
-  static Future<List<User>> getallusers() async {
-    final response = await http.get(Uri.parse(getusers));
-    final body = json.decode(response.body);
-    return body.map<User>(User.fromJson).toList();
-  }
-
+  DateTime dateTime = DateTime.now();
+  bool? vegischeck = true;
+  bool? fishischeck = true;
+  bool? chickenischeck = true;
+  bool? eggischeck = true;
+  bool? kottuischeck = true;
+  bool? riceischeck = true;
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    getallusers();
   }
 
   @override
@@ -35,45 +34,264 @@ class _todaymenuState extends State<todaymenu> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: Background(
-          child: Container(
-        child: Column(children: [
-          SizedBox(
-            height: size.height * 0.08,
-          ),
-          Container(
-            child: Expanded(
-                child: FutureBuilder<List<User>>(
-                    future: users,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator.adaptive();
-                      } else if (snapshot.hasData) {
-                        final users = snapshot.data!;
-                        return buildusers(users);
-                      } else {
-                        return const Text("No Menu data");
-                      }
-                    })),
-          )
-        ]),
-      )),
+          child: Column(children: [
+        SizedBox(
+          height: size.height * 0.08,
+        ),
+        newMethod(size)
+      ])),
     );
   }
-}
 
-Widget buildusers(List<User> users) {
-  return ListView.builder(
-    padding: EdgeInsets.zero,
-    shrinkWrap: true,
-    itemCount: users.length,
-    itemBuilder: (context, index) {
-      final User = users[index];
-
-      return user_card(
-          name: User.name,
-          mobile_number: User.mobile_number,
-          faculty: User.faculty,
-          address: User.address);
-    },
-  );
+  Column newMethod(Size size) {
+    return Column(
+      children: <Widget>[
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "VEG",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: vegischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      vegischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Fish",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: fishischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      fishischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Chicken",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: chickenischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      chickenischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Egg",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: eggischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      eggischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Rice",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: riceischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      riceischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(
+              left: size.width * 0.03,
+              top: size.width * 0.02,
+              bottom: size.width * 0.02,
+              right: size.width * 0.03),
+          alignment: Alignment.center,
+          width: size.width * 0.9,
+          height: size.height * 0.07,
+          margin: EdgeInsets.only(
+              left: size.width * 0.03,
+              bottom: size.width * 0.03,
+              right: size.width * 0.03),
+          decoration: BoxDecoration(
+            color: const Color.fromRGBO(119, 187, 162, 1.0),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Kottu",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: size.width * 0.05,
+                    color: const Color.fromRGBO(60, 121, 98, 1.0)),
+              ),
+              Checkbox(
+                  value: kottuischeck,
+                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                  onChanged: (newbool) {
+                    setState(() {
+                      kottuischeck = newbool;
+                    });
+                  })
+            ],
+          ),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10), // Rounded corners
+              ),
+              backgroundColor: const Color.fromRGBO(60, 121, 98, 1.0),
+              padding: EdgeInsets.symmetric(
+                  horizontal: size.height * 0.04, vertical: 12)),
+          child: Text(
+            "Update Foods",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: size.width * 0.04,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }
