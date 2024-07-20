@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class allusers extends StatefulWidget {
-  const allusers({super.key});
+  allusers({super.key});
 
   @override
   State<allusers> createState() => _allusersState();
@@ -37,7 +37,7 @@ class _allusersState extends State<allusers> {
           child: Container(
         child: Column(children: [
           SizedBox(
-            height: size.height * 0.07,
+            height: size.height * 0.03,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

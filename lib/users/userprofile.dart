@@ -200,7 +200,7 @@ class _userprofileState extends State<userprofile> {
                                                 fit: BoxFit.fitHeight,
                                               ),
                                               title: Text(
-                                                'Confirm Your Order',
+                                                'Remove User',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,

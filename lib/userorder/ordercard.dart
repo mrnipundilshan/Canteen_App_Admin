@@ -360,7 +360,7 @@ class _order_cardState extends State<order_card> {
                                         fit: BoxFit.fitHeight,
                                       ),
                                       title: Text(
-                                        'Confirm Your Order',
+                                        'Remove The Order',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
