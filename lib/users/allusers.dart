@@ -3,9 +3,7 @@ import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
 import 'package:canteen/users/usercard.dart';
 import 'package:canteen/users/userclass.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class allusers extends StatefulWidget {
