@@ -28,6 +28,13 @@ class _toolspageState extends State<toolspage> {
     );
   }
 
+  void _navigateToorders() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => todaymenu()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -46,6 +53,26 @@ class _toolspageState extends State<toolspage> {
                 imagename: "assets/menuicons/users.png",
                 gridname: "Users",
                 onTap: _navigateToUsers,
+              ),
+              grid(
+                size: size,
+                imagename: "assets/menuicons/menu.png",
+                gridname: "Today menu",
+                onTap: _navigateToTodayMenu,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: size.height * 0.03,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              grid(
+                size: size,
+                imagename: "assets/menuicons/orders.png",
+                gridname: "Orders",
+                onTap: _navigateToorders,
               ),
               grid(
                 size: size,
