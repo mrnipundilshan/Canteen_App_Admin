@@ -3,7 +3,9 @@ import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
 import 'package:canteen/users/usercard.dart';
 import 'package:canteen/users/userclass.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 
 class allusers extends StatefulWidget {
@@ -46,6 +48,7 @@ class _allusersState extends State<allusers> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       body: Background(
           child: Container(
         child: Column(children: [
@@ -55,6 +58,7 @@ class _allusersState extends State<allusers> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: TextField(
+              keyboardType: TextInputType.number,
               controller: _searchController,
               decoration: const InputDecoration(
                 hintText: 'Search by mobile number',
@@ -75,28 +79,24 @@ class _allusersState extends State<allusers> {
           SizedBox(
             height: size.height * 0.03,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                  child: FutureBuilder<List<User>>(
-                      future: users,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator.adaptive();
-                        } else if (snapshot.hasData) {
-                          final users = snapshot.data!
-                              .where((user) =>
-                                  user.mobile_number.startsWith(_searchQuery))
-                              .toList();
+          Container(
+            child: Expanded(
+                child: FutureBuilder<List<User>>(
+                    future: users,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator.adaptive();
+                      } else if (snapshot.hasData) {
+                        final users = snapshot.data!
+                            .where((user) =>
+                                user.mobile_number.startsWith(_searchQuery))
+                            .toList();
 
-                          return buildusers(users);
-                        } else {
-                          return const Text("No Menu data");
-                        }
-                      })),
-            ],
+                        return buildusers(users);
+                      } else {
+                        return const Text("No Menu data");
+                      }
+                    })),
           )
         ]),
       )),
