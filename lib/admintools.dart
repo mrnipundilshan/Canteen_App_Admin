@@ -1,4 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/today%20menu/todaymenu.dart';
 import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,21 @@ class toolspage extends StatefulWidget {
 class _toolspageState extends State<toolspage> {
   String imagename = '';
   String gridname = '';
+
+  void _navigateToUsers() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => allusers()),
+    );
+  }
+
+  void _navigateToTodayMenu() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => todaymenu()),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -26,13 +42,17 @@ class _toolspageState extends State<toolspage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               grid(
-                  size: size,
-                  imagename: "assets/menuicons/users.png",
-                  gridname: "Users"),
+                size: size,
+                imagename: "assets/menuicons/users.png",
+                gridname: "Users",
+                onTap: _navigateToUsers,
+              ),
               grid(
-                  size: size,
-                  imagename: "assets/menuicons/menu.png",
-                  gridname: "Today menu"),
+                size: size,
+                imagename: "assets/menuicons/menu.png",
+                gridname: "Today menu",
+                onTap: _navigateToTodayMenu,
+              ),
             ],
           )
         ]),
@@ -47,11 +67,13 @@ class grid extends StatelessWidget {
     required this.size,
     required this.imagename,
     required this.gridname,
+    required this.onTap,
   });
 
   final Size size;
   final String imagename;
   final String gridname;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -87,12 +109,7 @@ class grid extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(10),
             splashColor: Colors.black12,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => allusers()),
-              );
-            },
+            onTap: onTap,
           ),
         ),
       ),

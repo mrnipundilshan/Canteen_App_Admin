@@ -6,14 +6,14 @@ import 'package:canteen/users/userclass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class allusers extends StatefulWidget {
-  allusers({super.key});
+class todaymenu extends StatefulWidget {
+  todaymenu({super.key});
 
   @override
-  State<allusers> createState() => _allusersState();
+  State<todaymenu> createState() => _todaymenuState();
 }
 
-class _allusersState extends State<allusers> {
+class _todaymenuState extends State<todaymenu> {
   Future<List<User>> users = getallusers();
 
   static Future<List<User>> getallusers() async {
