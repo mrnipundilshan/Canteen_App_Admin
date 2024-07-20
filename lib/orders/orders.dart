@@ -1,32 +1,25 @@
 import 'dart:convert';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
-import 'package:canteen/userorder/ordercard.dart';
-import 'package:canteen/userorder/orderclass.dart';
+import 'package:canteen/orders/ordercard.dart';
+import 'package:canteen/orders/orderclass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class orderpage extends StatefulWidget {
-  final String mobilenumber;
-  const orderpage({super.key, required this.mobilenumber});
+class allorderpage extends StatefulWidget {
+  const allorderpage({super.key});
 
   @override
-  State<orderpage> createState() => _orderpageState();
+  State<allorderpage> createState() => _allorderpageState();
 }
 
-class _orderpageState extends State<orderpage> {
-  late Future<List<Order>> orders;
+class _allorderpageState extends State<allorderpage> {
+  Future<List<AllOrder>> allorders = getallorders();
 
-  static Future<List<Order>> getorderlist(mobilenumber) async {
-    var regbody = {
-      "mobile_number": mobilenumber,
-    };
-    var response = await http.post(Uri.parse(getuserorders),
-        headers: {"content-Type": "application/json"},
-        body: jsonEncode(regbody));
-
-    var jsonResponse = jsonDecode(response.body);
-    return jsonResponse.map<Order>(Order.fromJson).toList();
+  static Future<List<AllOrder>> getallorders() async {
+    final response = await http.get(Uri.parse(getorders));
+    final body = json.decode(response.body);
+    return body.map<AllOrder>(AllOrder.fromJson).toList();
   }
 
   @override
@@ -34,7 +27,7 @@ class _orderpageState extends State<orderpage> {
     //TODO: implement initState
     super.initState();
 
-    orders = getorderlist(widget.mobilenumber);
+    getallorders();
   }
 
   @override
@@ -83,17 +76,17 @@ class _orderpageState extends State<orderpage> {
                           height: size.height * 0.02,
                         ),
                         Expanded(
-                            child: FutureBuilder<List<Order>>(
-                                future: orders,
+                            child: FutureBuilder<List<AllOrder>>(
+                                future: allorders,
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
                                     return const CircularProgressIndicator
                                         .adaptive();
                                   } else if (snapshot.hasData) {
-                                    final orders = snapshot.data!;
+                                    final allorders = snapshot.data!;
 
-                                    return buildorders(orders);
+                                    return buildorders(allorders);
                                   } else {
                                     return const Text("No Menu data");
                                   }
@@ -103,15 +96,16 @@ class _orderpageState extends State<orderpage> {
   }
 }
 
-Widget buildorders(List<Order> orders) {
+Widget buildorders(List<AllOrder> allorders) {
   return ListView.builder(
     padding: EdgeInsets.zero,
     shrinkWrap: true,
-    itemCount: orders.length,
+    itemCount: allorders.length,
     itemBuilder: (context, index) {
-      final Order = orders[index];
+      final Order = allorders[index];
 
-      return order_card(
+      return allorder_card(
+          mobile_number: Order.mobile_number,
           total: Order.total,
           veg_count: Order.veg_count,
           veg_price: Order.veg_price,

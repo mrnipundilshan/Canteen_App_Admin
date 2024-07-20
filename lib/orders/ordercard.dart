@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class order_card extends StatefulWidget {
+class allorder_card extends StatefulWidget {
+  final String mobile_number;
   final int total;
   final int veg_count;
   final int veg_price;
@@ -17,8 +18,9 @@ class order_card extends StatefulWidget {
   final int fish_price;
   final String orderid;
 
-  const order_card(
+  const allorder_card(
       {super.key,
+      required this.mobile_number,
       required this.total,
       required this.veg_count,
       required this.veg_price,
@@ -34,10 +36,10 @@ class order_card extends StatefulWidget {
       required this.fish_price,
       required this.orderid});
   @override
-  State<order_card> createState() => _order_cardState();
+  State<allorder_card> createState() => _allorder_cardState();
 }
 
-class _order_cardState extends State<order_card> {
+class _allorder_cardState extends State<allorder_card> {
   @override
   Widget build(BuildContext context) {
     int vegtotal = widget.veg_count * widget.veg_price;
@@ -69,22 +71,12 @@ class _order_cardState extends State<order_card> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "ID: " + widget.orderid,
+                widget.mobile_number,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: size.width * 0.03,
+                    fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              IconButton(
-                  iconSize: size.width * 0.035,
-                  color: const Color.fromARGB(255, 11, 105, 69),
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: widget.orderid));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Your Order ID coppied')),
-                    );
-                  },
-                  icon: const Icon(Icons.copy)),
             ],
           ),
           Table(

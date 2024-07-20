@@ -1,4 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/orders/orders.dart';
 import 'package:canteen/today%20menu/todaymenu.dart';
 import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class _toolspageState extends State<toolspage> {
   void _navigateToorders() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => todaymenu()),
+      MaterialPageRoute(builder: (context) => const allorderpage()),
     );
   }
 

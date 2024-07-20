@@ -11,3 +11,4 @@ final getusers = "${url}getusers";
 final removeuserr = "${url}removeuser";
 final removeorderr = "${url}removeorder";
 final updatefoodlist = "${url}updatefoodlist";
+final getorders = "${url}getorders";

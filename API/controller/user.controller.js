@@ -213,3 +213,13 @@ exports.updatefoodlist = async(req, res) => {
         res.status(500).json({ status: false, error: 'Error updating food visibility', details: error });
     }
 };
+
+exports.getorders = async (req,res)=>{
+    try{
+        const collection = db.collection('orders');
+        const orders = await collection.find({}).toArray();
+        res.status(200).json(orders);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};
