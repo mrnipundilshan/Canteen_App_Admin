@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
-import 'package:canteen/users/usercard.dart';
-import 'package:canteen/users/userclass.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:giffy_dialog/giffy_dialog.dart';
 import 'package:http/http.dart' as http;
 
 class todaymenu extends StatefulWidget {
@@ -15,6 +13,29 @@ class todaymenu extends StatefulWidget {
 }
 
 class _todaymenuState extends State<todaymenu> {
+  void updatelist() async {
+    var regbody = {
+      "vegischeck": vegischeck,
+      "fishischeck": fishischeck,
+      "chickenischeck": chickenischeck,
+      "eggischeck": eggischeck,
+      "kottuischeck": kottuischeck,
+      "riceischeck": riceischeck
+    };
+
+    var response = await http.post(Uri.parse(updatefoodlist),
+        headers: {"content-Type": "application/json"},
+        body: jsonEncode(regbody));
+
+    var jsonResponse = jsonDecode(response.body);
+
+    if (jsonResponse['status']) {
+      print("success");
+    } else {
+      print("not susces");
+    }
+  }
+
   DateTime dateTime = DateTime.now();
   bool? vegischeck = true;
   bool? fishischeck = true;
@@ -67,7 +88,7 @@ class _todaymenuState extends State<todaymenu> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "VEG",
+                "Veg",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: size.width * 0.05,
@@ -275,7 +296,59 @@ class _todaymenuState extends State<todaymenu> {
           ),
         ),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return GiffyDialog.lottie(
+                    backgroundColor: Colors.white,
+                    entryAnimation: EntryAnimation.bottom,
+                    Lottie.asset(
+                      "assets/remove.json",
+                      height: 150,
+                      fit: BoxFit.fitHeight,
+                    ),
+                    title: Text(
+                      'Update Order List',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: size.width * 0.05,
+                          color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                    ),
+                    actions: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context, 'CANCEL'),
+                            child: Text(
+                              'CANCEL',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: size.width * 0.035,
+                                  color:
+                                      const Color.fromRGBO(60, 121, 98, 1.0)),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              updatelist();
+                              Navigator.pop(context, 'OK');
+                            },
+                            child: Text('OK',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: size.width * 0.035,
+                                    color: const Color.fromRGBO(
+                                        60, 121, 98, 1.0))),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                });
+          },
           style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10), // Rounded corners

@@ -1,6 +1,7 @@
 const UserModel = require("../model/user.model");
 const UserService = require("../services/user.services");
 const db = require('../config/db');
+const { ObjectId } = require('mongodb');
 
 exports.register = async(req,res,next)=>{
     try{
@@ -161,7 +162,7 @@ exports.removeuser = async (req, res) => {
     }
 };
 
-const { ObjectId } = require('mongodb');
+
 
 exports.removeorder = async (req, res) => {
     try {
@@ -185,3 +186,30 @@ exports.removeorder = async (req, res) => {
     }
 };
 
+exports.updatefoodlist = async(req, res) => {
+    try {
+        const { vegischeck, fishischeck, chickenischeck, eggischeck, kottuischeck, riceischeck } = req.body;
+
+        const foodItems = [
+            { name: 'Veg', visible: vegischeck },
+            { name: 'Fish', visible: fishischeck },
+            { name: 'Chicken', visible: chickenischeck },
+            { name: 'Egg', visible: eggischeck },
+            { name: 'Kottu', visible: kottuischeck },
+            { name: 'Rice', visible: riceischeck }
+        ];
+
+        const collection = db.collection('menu');
+
+        for (const item of foodItems) {
+            await collection.updateOne(
+                { name: item.name },
+                { $set: { visible: item.visible } }
+            );
+        }
+
+        res.status(200).json({ status: true, success: "Food visibility updated successfully" });
+    } catch (error) {
+        res.status(500).json({ status: false, error: 'Error updating food visibility', details: error });
+    }
+};
