@@ -251,3 +251,13 @@ exports.moveorders = async (req,res) =>{
         res.status(500).json({ status: false, error: 'Error moving order to deliver collection', details: error });
     }
 }
+
+exports.getdelivers = async (req,res)=>{
+    try{
+        const collection = db.collection('deliver');
+        const orders = await collection.find({}).toArray();
+        res.status(200).json(orders);
+    } catch(error){
+        res.status(500).json({message: 'Error fetching menu details', error: error});
+    }
+};

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'package:canteen/admintools.dart';
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/config/config.dart';
-import 'package:canteen/deliver/ordercard.dart';
-import 'package:canteen/deliver/orderclass.dart';
+import 'package:canteen/deliver/deliverscard.dart';
+import 'package:canteen/deliver/deliversclass.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

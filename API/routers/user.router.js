@@ -24,6 +24,8 @@ router.delete('/removeorder',UserController.removeorder);
 router.post('/updatefoodlist',UserController.updatefoodlist);
 router.get('/getorders',UserController.getorders);
 router.post('/moveorders',UserController.moveorders);
+router.get('/getdelivers',UserController.getdelivers);
+
 
 
 module.exports = router;

@@ -1,4 +1,5 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
+import 'package:canteen/deliver/delivers.dart';
 import 'package:canteen/orders/orders.dart';
 import 'package:canteen/today%20menu/todaymenu.dart';
 import 'package:canteen/users/allusers.dart';
@@ -33,6 +34,13 @@ class _toolspageState extends State<toolspage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const allorderpage()),
+    );
+  }
+
+  void _navigateTodeliver() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const deliverpage()),
     );
   }
 
@@ -79,7 +87,7 @@ class _toolspageState extends State<toolspage> {
                 size: size,
                 imagename: "assets/menuicons/deliver.png",
                 gridname: "Deliver",
-                onTap: _navigateToTodayMenu,
+                onTap: _navigateTodeliver,
               ),
             ],
           )
