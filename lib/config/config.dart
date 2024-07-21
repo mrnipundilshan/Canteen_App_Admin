@@ -14,3 +14,6 @@ final updatefoodlist = "${url}updatefoodlist";
 final getorders = "${url}getorders";
 final moveorders = "${url}moveorders";
 final getdelivers = "${url}getdelivers";
+final getoverview = "${url}getoverview";
+final getdeliveroverview = "${url}getdeliveroverview";
+final getUserCount = "${url}getUserCount";

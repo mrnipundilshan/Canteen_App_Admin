@@ -25,6 +25,10 @@ router.post('/updatefoodlist',UserController.updatefoodlist);
 router.get('/getorders',UserController.getorders);
 router.post('/moveorders',UserController.moveorders);
 router.get('/getdelivers',UserController.getdelivers);
+router.get('/getoverview',UserController.getoverview);
+router.get('/getdeliveroverview',UserController.getdeliveroverview);
+router.get('/getUserCount',UserController.getUserCount);
+
 
 
 

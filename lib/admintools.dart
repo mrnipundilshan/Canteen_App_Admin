@@ -1,6 +1,7 @@
 import 'package:canteen/backgrounds/signup_bg.dart';
 import 'package:canteen/deliver/delivers.dart';
 import 'package:canteen/orders/orders.dart';
+import 'package:canteen/overview/overview.dart';
 import 'package:canteen/today%20menu/todaymenu.dart';
 import 'package:canteen/users/allusers.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,13 @@ class _toolspageState extends State<toolspage> {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const deliverpage()),
+    );
+  }
+
+  void _navigateTooverview() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => overview()),
     );
   }
 
@@ -88,6 +96,20 @@ class _toolspageState extends State<toolspage> {
                 imagename: "assets/menuicons/deliver.png",
                 gridname: "Deliver",
                 onTap: _navigateTodeliver,
+              ),
+            ],
+          ),
+          SizedBox(
+            height: size.height * 0.03,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              grid(
+                size: size,
+                imagename: "assets/menuicons/summery.png",
+                gridname: "Overview",
+                onTap: _navigateTooverview,
               ),
             ],
           )

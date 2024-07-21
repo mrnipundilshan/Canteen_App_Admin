@@ -261,3 +261,106 @@ exports.getdelivers = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+exports.getoverview = async (req, res) => {
+    try {
+        const collection = db.collection('orders');
+
+        const result = await collection.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalVegCount: { $sum: "$veg_count" },
+                    totalEggCount: { $sum: "$egg_count" },
+                    totalChickenCount: { $sum: "$chicken_count" },
+                    totalRiceCount: { $sum: "$rice_count" },
+                    totalKottuCount: { $sum: "$kottu_count" },
+                    totalFishCount: { $sum: "$fish_count" },
+                    vegPrice: { $first: "$veg_price" },
+                    eggPrice: { $first: "$egg_price" },
+                    chickenPrice: { $first: "$chicken_price" },
+                    ricePrice: { $first: "$rice_price" },
+                    kottuPrice: { $first: "$kottu_price" },
+                    fishPrice: { $first: "$fish_price" }
+                }
+            }
+        ]).toArray();
+
+        const response = result.length > 0 ? result[0] : {
+            totalVegCount: 0,
+            vegPrice: 0,
+            totalEggCount: 0,
+            eggPrice: 0,
+            totalChickenCount: 0,
+            chickenPrice: 0,
+            totalRiceCount: 0,
+            ricePrice: 0,
+            totalKottuCount: 0,
+            kottuPrice: 0,
+            totalFishCount: 0,
+            fishPrice: 0
+        };
+
+        res.status(200).json({ status: true, ...response });
+    } catch (error) {
+        res.status(500).json({ status: false, message: 'Error fetching total food counts and prices', error: error });
+    }
+};
+
+
+exports.getdeliveroverview = async (req, res) => {
+    try {
+        const collection = db.collection('deliver');
+
+        const result = await collection.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    totalVegCount: { $sum: "$veg_count" },
+                    totalEggCount: { $sum: "$egg_count" },
+                    totalChickenCount: { $sum: "$chicken_count" },
+                    totalRiceCount: { $sum: "$rice_count" },
+                    totalKottuCount: { $sum: "$kottu_count" },
+                    totalFishCount: { $sum: "$fish_count" },
+                    vegPrice: { $first: "$veg_price" },
+                    eggPrice: { $first: "$egg_price" },
+                    chickenPrice: { $first: "$chicken_price" },
+                    ricePrice: { $first: "$rice_price" },
+                    kottuPrice: { $first: "$kottu_price" },
+                    fishPrice: { $first: "$fish_price" }
+                }
+            }
+        ]).toArray();
+
+        const response = result.length > 0 ? result[0] : {
+            totalVegCount: 0,
+            vegPrice: 0,
+            totalEggCount: 0,
+            eggPrice: 0,
+            totalChickenCount: 0,
+            chickenPrice: 0,
+            totalRiceCount: 0,
+            ricePrice: 0,
+            totalKottuCount: 0,
+            kottuPrice: 0,
+            totalFishCount: 0,
+            fishPrice: 0
+        };
+
+        res.status(200).json({ status: true, ...response });
+    } catch (error) {
+        res.status(500).json({ status: false, message: 'Error fetching total food counts and prices', error: error });
+    }
+};
+
+exports.getUserCount = async (req, res) => {
+    try {
+        const collection = db.collection('users');
+        const userCount = await collection.countDocuments();
+
+        res.status(200).json({ status: true, userCount: userCount });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching user count', error: error });
+    }
+};
+

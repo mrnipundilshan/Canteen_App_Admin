@@ -94,14 +94,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: vegischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      vegischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Rs. 100",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: vegischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          vegischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
@@ -132,14 +143,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: fishischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      fishischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Re. 130",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: fishischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          fishischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
@@ -170,14 +192,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: chickenischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      chickenischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Rs. 180",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: chickenischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          chickenischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
@@ -208,14 +241,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: eggischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      eggischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Rs. 150",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: eggischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          eggischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
@@ -246,14 +290,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: riceischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      riceischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Rs. 200",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: riceischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          riceischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
@@ -284,14 +339,25 @@ class _todaymenuState extends State<todaymenu> {
                     fontSize: size.width * 0.05,
                     color: const Color.fromRGBO(60, 121, 98, 1.0)),
               ),
-              Checkbox(
-                  value: kottuischeck,
-                  activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
-                  onChanged: (newbool) {
-                    setState(() {
-                      kottuischeck = newbool;
-                    });
-                  })
+              Row(
+                children: [
+                  Text(
+                    "Rs. 200",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: size.width * 0.05,
+                        color: const Color.fromRGBO(60, 121, 98, 1.0)),
+                  ),
+                  Checkbox(
+                      value: kottuischeck,
+                      activeColor: const Color.fromRGBO(60, 121, 98, 1.0),
+                      onChanged: (newbool) {
+                        setState(() {
+                          kottuischeck = newbool;
+                        });
+                      }),
+                ],
+              )
             ],
           ),
         ),
