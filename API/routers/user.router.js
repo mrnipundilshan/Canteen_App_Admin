@@ -23,5 +23,7 @@ router.delete('/removeuser',UserController.removeuser);
 router.delete('/removeorder',UserController.removeorder);
 router.post('/updatefoodlist',UserController.updatefoodlist);
 router.get('/getorders',UserController.getorders);
+router.post('/moveorders',UserController.moveorders);
+
 
 module.exports = router;

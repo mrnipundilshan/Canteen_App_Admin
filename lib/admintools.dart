@@ -77,8 +77,8 @@ class _toolspageState extends State<toolspage> {
               ),
               grid(
                 size: size,
-                imagename: "assets/menuicons/menu.png",
-                gridname: "Today menu",
+                imagename: "assets/menuicons/deliver.png",
+                gridname: "Deliver",
                 onTap: _navigateToTodayMenu,
               ),
             ],

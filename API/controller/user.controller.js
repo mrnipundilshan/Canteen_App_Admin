@@ -223,3 +223,31 @@ exports.getorders = async (req,res)=>{
         res.status(500).json({message: 'Error fetching menu details', error: error});
     }
 };
+
+exports.moveorders = async (req,res) =>{
+    try{
+        const { _id } = req.body;
+
+        if(!_id){
+            return res.status(400).json({status: false, error: 'Order id is required'});
+        }
+
+        const ordersCollection = db.collection('orders');
+        const deliverCollection = db.collection('deliver');
+
+        const order = await ordersCollection.findOne({_id: new ObjectId(_id)});
+
+        if (!order) {
+            return res.status(404).json({ status: false, error: 'Order not found' });
+        }
+
+        await deliverCollection.insertOne(order);
+
+        await ordersCollection.deleteOne({_id: new ObjectId(_id)});
+
+        res.status(200).json({ status: true, success: 'Order moved to deliver collection successfully' });
+    } catch (error) {
+        console.error("Error details:", error);
+        res.status(500).json({ status: false, error: 'Error moving order to deliver collection', details: error });
+    }
+}

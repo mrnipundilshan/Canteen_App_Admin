@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
-class allorder_card extends StatefulWidget {
+class deliver_card extends StatefulWidget {
   final String mobile_number;
   final int total;
   final int veg_count;
@@ -23,7 +23,7 @@ class allorder_card extends StatefulWidget {
   final int fish_price;
   final String orderid;
 
-  const allorder_card(
+  const deliver_card(
       {super.key,
       required this.mobile_number,
       required this.total,
@@ -41,10 +41,10 @@ class allorder_card extends StatefulWidget {
       required this.fish_price,
       required this.orderid});
   @override
-  State<allorder_card> createState() => _allorder_cardState();
+  State<deliver_card> createState() => deliver_cardState();
 }
 
-class _allorder_cardState extends State<allorder_card> {
+class deliver_cardState extends State<deliver_card> {
   @override
   Widget build(BuildContext context) {
     void moveorder() async {
